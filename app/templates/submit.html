@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detector - Submit</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://ucarecdn.com/c3ff6c89-60d2-40bd-8ffe-49f00075d1e0/Frame9.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            color: white;
+        }
+
+        .container {
+            z-index: 1;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .custom-file-upload, .custom-button {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .custom-file-upload:hover, .custom-button:hover {
+            background-color: #0fca37;
+        }
+
+        .bottom-menu {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .bottom-menu span {
+            cursor: pointer;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        #file-name {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #ddd;
+        }
+
+        #description {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-4xl font-bold mb-8">PLANT DISEASE DETECTOR</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data" id="imageUploadForm">
+            <div class="button-container">
+                <label for="file-upload" class="custom-file-upload">Choose a file
+                    <input id="file-upload" type="file" name="image" accept="image/*" required />
+                </label>
+                <div id="file-name"></div>
+                <button id="submit-button" class="custom-button" type="submit">UPLOAD</button>
+            </div>
+        </form>
+        <div id="result"></div>
+        <div id="description" style="display: none;"></div>
+    </div>
+
+    <div class="bottom-menu">
+        <span id="introduction-button" class="hover:text-zinc-300 cursor-pointer">Introduction</span>
+        <span id="how-it-works-button" class="hover:text-zinc-300 cursor-pointer">How It Works</span>
+    </div>
+
+    <script>
+        document.getElementById('introduction-button').addEventListener('click', function() {
+            const introduction = "Welcome to the Plant Disease Detector! Our system helps you identify plant species and detect diseases from images of plant leaves. By analyzing leaf images using advanced techniques and machine learning algorithms, we provide you with instant feedback on the health status of your plants. Upload an image, and let us help you protect your plants!";
+            document.getElementById('description').innerText = introduction;
+            document.getElementById('description').style.display = 'block';
+        });
+
+        document.getElementById('how-it-works-button').addEventListener('click', function() {
+            const description = "Our system allows users to upload images of plant leaves. Using advanced image analysis techniques, it identifies the plant species and determines whether the leaf is infected or healthy. This is achieved through machine learning algorithms trained on a large dataset of plant images. Users receive instant feedback on the plant species and any detected infections, enabling prompt action to protect their plants.";
+            document.getElementById('description').innerText = description;
+            document.getElementById('description').style.display = 'block';
+        });
+
+        document.getElementById('file-upload').addEventListener('change', function() {
+            const fileName = this.files[0].name;
+            document.getElementById('file-name').innerText = `Selected file: ${fileName}`;
+        });
+    </script>
+</body>
+</html>

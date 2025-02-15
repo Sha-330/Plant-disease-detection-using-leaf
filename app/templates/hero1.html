@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Potta+One&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f6; /* Set background color */
+            color: #ffffff; /* Default text color */
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://ucarecdn.com/9a30b7ea-e7db-40c7-9538-ed605da4df85/Group15.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 0 20px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative; /* Position relative to contain absolutely positioned elements */
+        }
+        nav ul {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        nav ul li {
+            margin-right: 10px;
+        }
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+        nav ul li a {
+            display: inline-block;
+            color: #ffffff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #0fb809;
+        }
+    
+        .header {
+            font-family: 'Potta One', cursive; /* Apply Potta One font family to header */
+            font-size: 1.2rem;
+            padding: 14px 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffffff; /* Header text color */
+            position: absolute;
+            top: 30px;
+            left: 20px; /* Position at the top left corner */
+        }
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .container1 {
+            width: 550px;
+            padding: 1em;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+            color: #ffffff;
+        }
+        .container1 h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .container1 p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: center; /* Align items at the center */
+            align-items: center;
+            width: 100%; /* Full width */
+            margin-top: 20px; /* Add margin to separate from other elements */
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            border: 2px solid #ff4d4d; /* Red border color */
+            color: #ff4d4d; /* Red text color */
+            text-decoration: none; /* Remove underline */
+            margin-right: 10px; /* Add margin between buttons */
+        }
+        .button:last-child {
+            margin-right: 0; /* Remove margin from last button */
+        }
+        .button:hover {
+            background-color: #ff4d4d; /* Red background on hover */
+            color: #ffffff; /* White text on hover */
+        }
+        .log {
+            text-decoration: none;
+            color: #ff4d4d; /* Red text color */
+        }
+        .log:hover {
+            color: #ffffff; /* White text on hover */
+        }
+
+        .custom-button1 {
+            font-size: 1.5rem;
+            padding: 12px 24px;
+            border-radius: 9999px; /* Make button round */
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            border: 2px solid #4af81f;
+            color: #4af81f;
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            text-decoration: none; /* Remove underline */
+        }
+        .custom-button1:hover {
+            background-color: #0fca37; /* Green background on hover */
+            color: #ffffff; /* White text on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">CONTACT</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">Learn More</a></li>
+            </ul>
+            <a href="#" class="header">PLANT DISEASE DETECTOR</a>
+        </nav>
+
+        <main>
+            <div class="container1">
+                <h1>PLANT DISEASE DETECTION</h1>
+                <p>
+                    A plant disease detector employs sensing technologies and AI algorithms to swiftly identify diseases by analyzing plant symptoms or markers, aiding in early intervention for effective crop management and disease control.
+                </p>
+            </div>
+            <div class="flex-container">
+                <a href="#" class="button log">LOG IN</a>
+                <a href="#" class="button log">SIGN UP</a>
+            </div>
+        </main>
+    
+        <!-- Form for "GET STARTED" button with dynamic URL -->
+        <form action="{{ url_for('submit') }}" method="post" enctype="multipart/form-data">
+            <!-- Your form content -->
+            <a href="{{ url_for('submit') }}" class="custom-button1">GET STARTED</a>
+        </form>
+    </div>
+
+    <!-- Example: Update content dynamically -->
+    <div id="time"></div>
+
+    <!-- JavaScript code -->
+    <script>
+        var eventSource = new EventSource('/stream');
+        eventSource.onmessage = function(event) {
+            // Update content on the page using event.data
+            console.log('Received message:', event.data);
+            // For example, update a <div> with id="time" with the received data
+            document.getElementById('time').innerText = event.data;
+        };
+    </script>
+</body>
+</html>
